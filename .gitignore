@@ -1,0 +1,10 @@
+# Root gitignore
+.DS_Store
+*.log
+*.local
+
+# Node/Next.js
+node_modules/
+.next/
+out/
+build/

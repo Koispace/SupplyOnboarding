@@ -1,0 +1,54 @@
+"use client"
+
+import React from 'react'
+import { cn } from '@/lib/utils'
+import { Check } from 'lucide-react'
+
+/**
+ * VolumeSelector
+ *
+ * Card-based radio selector for SKU volume estimation.
+ *
+ * @param {Array}    options   – [{ value, label, subtitle }]
+ * @param {string}   selected – currently selected value
+ * @param {Function} onChange – called with the new value
+ */
+export default function VolumeSelector({ options = [], selected, onChange }) {
+  return (
+    <div className="grid grid-cols-3 gap-3">
+      {options.map((opt) => {
+        const isActive = selected === opt.value
+        return (
+          <button
+            type="button"
+            key={opt.value}
+            onClick={() => onChange(opt.value)}
+            className={cn(
+              'relative flex flex-col items-center justify-center h-[80px] rounded-xl border-2 transition-all duration-200 cursor-pointer',
+              isActive
+                ? 'border-primary bg-primary/5'
+                : 'border-[#E6DED4] bg-card hover:border-primary/30',
+            )}
+          >
+            {isActive && (
+              <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-primary flex items-center justify-center">
+                <Check className="w-3 h-3 text-white" />
+              </div>
+            )}
+            <span
+              className={cn(
+                'text-lg font-bold tracking-tight',
+                isActive ? 'text-primary' : 'text-foreground',
+              )}
+            >
+              {opt.label}
+            </span>
+            <span className="text-[11px] text-muted mt-0.5 font-medium">
+              {opt.subtitle}
+            </span>
+          </button>
+        )
+      })}
+    </div>
+  )
+}
