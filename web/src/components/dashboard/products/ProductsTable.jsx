@@ -24,7 +24,7 @@ export default function ProductsTable({ loading, products }) {
               <tr>
                 <td colSpan={7} className="p-8 text-center text-gray-500">
                   <div className="flex flex-col items-center justify-center gap-3">
-                    <div className="w-6 h-6 border-2 border-[#4F3863] border-t-transparent rounded-full animate-spin" />
+                    <div className="w-6 h-6 border-2 border-[#0E4032] border-t-transparent rounded-full animate-spin" />
                     Loading products...
                   </div>
                 </td>
@@ -33,13 +33,13 @@ export default function ProductsTable({ loading, products }) {
               <tr>
                 <td colSpan={7} className="p-16 text-center text-gray-500">
                   <div className="flex flex-col items-center justify-center max-w-sm mx-auto">
-                    <div className="w-16 h-16 bg-[#4F3863]/10 rounded-full flex items-center justify-center mb-4">
-                      <Package className="w-8 h-8 text-[#4F3863]" />
+                    <div className="w-16 h-16 bg-[#0E4032]/10 rounded-full flex items-center justify-center mb-4">
+                      <Package className="w-8 h-8 text-[#0E4032]" />
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">No products added yet</h3>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2" style={{ fontFamily: "var(--font-koi-heading)" }}>No products added yet</h3>
                     <p className="text-gray-500 mb-6">Start by adding your first product to KOI.</p>
                     <Link href="/dashboard/products/new" passHref>
-                      <Button className="bg-[#4F3863] hover:bg-[#382648] text-white rounded-xl gap-2 shadow-md">
+                      <Button className="bg-[#0E4032] hover:bg-[#0a2e24] text-white rounded-xl gap-2 shadow-md">
                         <Plus className="w-4 h-4" />
                         Add Product
                       </Button>
@@ -86,7 +86,7 @@ export default function ProductsTable({ loading, products }) {
                     )}
                   </td>
                   <td className="p-4 pr-6 text-right">
-                    <Button variant="ghost" size="sm" className="text-[#4F3863] hover:text-[#382648] hover:bg-[#4F3863]/10 font-semibold">
+                    <Button variant="ghost" size="sm" className="text-[#0E4032] hover:text-[#0a2e24] hover:bg-[#0E4032]/10 font-semibold">
                       View
                     </Button>
                   </td>

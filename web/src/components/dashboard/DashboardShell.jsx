@@ -10,7 +10,7 @@ export default function DashboardShell({ children }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   return (
-    <div className="flex h-screen bg-[#F8F4EC] overflow-hidden text-[#231C2D]">
+    <div className="flex h-screen bg-[#F8F4EC] overflow-hidden text-[#111827]">
       {/* Desktop Sidebar */}
       <div className="hidden md:block w-[280px] shrink-0 h-full">
         <DashboardSidebar />
@@ -23,7 +23,7 @@ export default function DashboardShell({ children }) {
             className="fixed inset-0 bg-black/40 backdrop-blur-sm"
             onClick={() => setIsMobileMenuOpen(false)}
           />
-          <div className="relative w-[280px] h-full bg-[#FCFAF7] shadow-xl z-50">
+          <div className="relative w-[280px] h-full bg-[#F2F6EC] shadow-xl z-50">
             <DashboardSidebar onClose={() => setIsMobileMenuOpen(false)} />
           </div>
         </div>
@@ -38,7 +38,7 @@ export default function DashboardShell({ children }) {
               variant="ghost" 
               size="icon" 
               onClick={() => setIsMobileMenuOpen(true)}
-              className="text-[#6B6473] hover:text-[#231C2D] hover:bg-black/5"
+              className="text-[#6B7280] hover:text-[#111827] hover:bg-black/5"
             >
               <Menu className="w-5 h-5" />
             </Button>

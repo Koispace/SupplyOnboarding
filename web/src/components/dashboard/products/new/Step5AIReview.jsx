@@ -45,12 +45,12 @@ export default function Step5AIReview({ productId, aiReviewResults, setAiReviewR
     return (
       <div className="flex flex-col items-center justify-center py-20 animate-in fade-in duration-500">
         <div className="relative mb-8">
-          <div className="absolute inset-0 bg-[#4F3863] rounded-full blur-xl opacity-20 animate-pulse" />
+          <div className="absolute inset-0 bg-[#0E4032] rounded-full blur-xl opacity-20 animate-pulse" />
           <div className="w-20 h-20 bg-white rounded-full border border-gray-100 shadow-xl flex items-center justify-center relative z-10">
-            <Activity className="w-10 h-10 text-[#4F3863] animate-bounce" />
+            <Activity className="w-10 h-10 text-[#0E4032] animate-bounce" />
           </div>
         </div>
-        <h3 className="text-2xl font-bold text-gray-900 mb-3">AI Label Extraction in Progress</h3>
+        <h3 className="text-2xl font-bold text-gray-900 mb-3" style={{ fontFamily: "var(--font-koi-heading)" }}>AI Label Extraction in Progress</h3>
         <p className="text-gray-500 text-center max-w-md">
           KOI is scanning your nutrition panels and ingredient lists to verify claims and check for banned substances. This takes a few seconds...
         </p>
@@ -65,7 +65,7 @@ export default function Step5AIReview({ productId, aiReviewResults, setAiReviewR
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-gray-100 pb-6">
         <div>
           <div className="flex items-center gap-3 mb-2">
-            <h3 className="text-2xl font-bold text-gray-900">AI Review Complete</h3>
+            <h3 className="text-2xl font-bold text-gray-900" style={{ fontFamily: "var(--font-koi-heading)" }}>AI Review Complete</h3>
             <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full flex items-center gap-1">
               <CheckCircle className="w-3 h-3" />
               Score: {aiReviewResults.healthScore}/100
@@ -79,7 +79,7 @@ export default function Step5AIReview({ productId, aiReviewResults, setAiReviewR
         {/* Left Column: Nutrition & Ingredients */}
         <div className="space-y-6">
           <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100">
-            <h4 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
+            <h4 className="font-semibold text-gray-900 mb-4 flex items-center gap-2" style={{ fontFamily: "var(--font-koi-heading)" }}>
               <Info className="w-4 h-4 text-gray-400" />
               Extracted Nutrition (per 100g)
             </h4>
@@ -94,7 +94,7 @@ export default function Step5AIReview({ productId, aiReviewResults, setAiReviewR
           </div>
 
           <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100">
-            <h4 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
+            <h4 className="font-semibold text-gray-900 mb-4 flex items-center gap-2" style={{ fontFamily: "var(--font-koi-heading)" }}>
               <Info className="w-4 h-4 text-gray-400" />
               Detected Ingredients
             </h4>
@@ -112,7 +112,7 @@ export default function Step5AIReview({ productId, aiReviewResults, setAiReviewR
         <div className="space-y-6">
           {aiReviewResults.flags.length > 0 ? (
             <div className="bg-amber-50 rounded-2xl p-6 border border-amber-100">
-              <h4 className="font-semibold text-amber-900 mb-4 flex items-center gap-2">
+              <h4 className="font-semibold text-amber-900 mb-4 flex items-center gap-2" style={{ fontFamily: "var(--font-koi-heading)" }}>
                 <AlertTriangle className="w-5 h-5 text-amber-500" />
                 Attention Required ({aiReviewResults.flags.length})
               </h4>
@@ -133,14 +133,14 @@ export default function Step5AIReview({ productId, aiReviewResults, setAiReviewR
             <div className="bg-green-50 rounded-2xl p-6 border border-green-100 flex items-center gap-3">
               <CheckCircle className="w-6 h-6 text-green-500" />
               <div>
-                <h4 className="font-semibold text-green-900">All Clear!</h4>
+                <h4 className="font-semibold text-green-900" style={{ fontFamily: "var(--font-koi-heading)" }}>All Clear!</h4>
                 <p className="text-sm text-green-700">No discrepancies or banned substances detected.</p>
               </div>
             </div>
           )}
 
           <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
-            <h4 className="font-semibold text-gray-900 mb-4">Next Steps</h4>
+            <h4 className="font-semibold text-gray-900 mb-4" style={{ fontFamily: "var(--font-koi-heading)" }}>Next Steps</h4>
             <p className="text-sm text-gray-600 mb-6">
               If the extracted information looks incorrect, you can go back and upload clearer label images. Otherwise, submit for final approval.
             </p>
@@ -158,7 +158,7 @@ export default function Step5AIReview({ productId, aiReviewResults, setAiReviewR
               <Button 
                 onClick={handleSubmit} 
                 disabled={submitting}
-                className="flex-1 bg-[#4F3863] hover:bg-[#382648] text-white rounded-xl h-12 font-semibold shadow-md"
+                className="flex-1 bg-[#0E4032] hover:bg-[#0a2e24] text-white rounded-xl h-12 font-semibold shadow-md"
               >
                 {submitting ? (
                   <div className="flex items-center gap-2">

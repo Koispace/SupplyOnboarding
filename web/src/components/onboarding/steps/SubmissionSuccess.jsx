@@ -72,7 +72,7 @@ export default function SubmissionSuccess() {
 
         {/* ─── Status Timeline ───────────── */}
         <div
-          className="bg-[#FDFCFA] border border-[#E6DED4] rounded-2xl px-6 md:px-8 py-7 mb-6"
+          className="bg-[#FDFCFA] border border-[#E5E7EB] rounded-2xl px-6 md:px-8 py-7 mb-6"
           style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.02)' }}
         >
           <div className="space-y-0">
@@ -154,7 +154,7 @@ function TimelineItem({ title, status, icon: Icon, text, isLast }) {
             'w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all',
             isCompleted && 'bg-success/15 text-success',
             isActive && 'bg-primary/12 text-primary animate-pulse',
-            !isCompleted && !isActive && 'bg-[#E6DED4] text-muted',
+            !isCompleted && !isActive && 'bg-[#E5E7EB] text-muted',
           )}
         >
           <Icon className="w-4 h-4" strokeWidth={2} />
@@ -163,7 +163,7 @@ function TimelineItem({ title, status, icon: Icon, text, isLast }) {
           <div
             className={cn(
               'w-0.5 flex-1 min-h-[32px] my-1.5',
-              isCompleted ? 'bg-success/30' : 'bg-[#E6DED4]',
+              isCompleted ? 'bg-success/30' : 'bg-[#E5E7EB]',
             )}
           />
         )}

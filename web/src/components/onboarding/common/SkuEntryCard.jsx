@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input'
 import { useDropzone } from 'react-dropzone'
 
 const INPUT_CLASS =
-  'h-12 rounded-xl border-[#E6DED4] bg-[#FDFCFA] px-4 text-sm placeholder:text-muted/60 hover:border-[#C9C1B6] focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-200'
+  'h-12 rounded-xl border-[#E5E7EB] bg-[#FDFCFA] px-4 text-sm placeholder:text-muted/60 hover:border-[#C9C1B6] focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-200'
 
 /**
  * SkuEntryCard
@@ -33,7 +33,7 @@ export default function SkuEntryCard({
   const skuNum = index + 1
 
   return (
-    <div className="border border-[#E6DED4] rounded-xl overflow-hidden bg-card transition-all">
+    <div className="border border-[#E5E7EB] rounded-xl overflow-hidden bg-card transition-all">
       {/* Collapse header */}
       <button
         type="button"
@@ -58,7 +58,7 @@ export default function SkuEntryCard({
 
       {/* Body */}
       {isOpen && (
-        <div className="px-5 pb-5 pt-1 space-y-5 border-t border-[#E6DED4]">
+        <div className="px-5 pb-5 pt-1 space-y-5 border-t border-[#E5E7EB]">
           {/* Product Name */}
           <div>
             <label className="block text-[13px] font-semibold text-foreground mb-1.5 tracking-tight">
@@ -167,7 +167,7 @@ function LabelUploadField({
 
       {mode === 'upload' ? (
         fileValue ? (
-          <div className="flex items-center justify-between bg-[#FDFCFA] border border-[#E6DED4] rounded-xl px-4 py-2.5">
+          <div className="flex items-center justify-between bg-[#FDFCFA] border border-[#E5E7EB] rounded-xl px-4 py-2.5">
             <div className="flex items-center gap-2.5">
               <File className="w-4 h-4 text-primary" />
               <span className="text-sm text-foreground truncate max-w-[200px]">

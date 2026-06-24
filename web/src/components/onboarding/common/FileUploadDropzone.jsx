@@ -66,7 +66,7 @@ export default function FileUploadDropzone({
             {label}
           </label>
         )}
-        <div className="flex items-center justify-between bg-[#FDFCFA] border border-[#E6DED4] rounded-xl px-4 py-3">
+        <div className="flex items-center justify-between bg-[#FDFCFA] border border-[#E5E7EB] rounded-xl px-4 py-3">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
               <File className="w-4 h-4" />

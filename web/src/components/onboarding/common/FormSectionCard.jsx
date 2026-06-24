@@ -22,7 +22,7 @@ export default function FormSectionCard({
   return (
     <section
       className={cn(
-        'bg-card border border-[#E6DED4] px-7 pt-6 pb-7 md:px-8 md:pt-7 md:pb-8 rounded-[20px]',
+        'bg-card border border-[#E5E7EB] px-7 pt-6 pb-7 md:px-8 md:pt-7 md:pb-8 rounded-[20px]',
         className,
       )}
       style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}

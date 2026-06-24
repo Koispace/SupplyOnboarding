@@ -58,7 +58,7 @@ function AddProductWizard() {
     <div className="max-w-5xl mx-auto pb-24">
       {/* Header & Stepper */}
       <div className="mb-8">
-        <h2 className="text-[32px] md:text-[36px] font-display font-bold text-[#231C2D] tracking-tight leading-none mb-6">
+        <h2 className="text-[32px] md:text-[36px] font-display font-bold text-[#111827] tracking-tight leading-none mb-6" style={{ fontFamily: "var(--font-koi-heading)" }}>
           Add New Product
         </h2>
         
@@ -70,8 +70,8 @@ function AddProductWizard() {
             return (
               <React.Fragment key={step.id}>
                 <div className={`flex items-center justify-center h-8 px-4 rounded-full text-sm font-semibold whitespace-nowrap transition-all ${
-                  isActive ? 'bg-[#4F3863] text-white shadow-md' :
-                  isCompleted ? 'bg-[#4F3863]/10 text-[#4F3863]' :
+                  isActive ? 'bg-[#0E4032] text-white shadow-md' :
+                  isCompleted ? 'bg-[#0E4032]/10 text-[#0E4032]' :
                   'bg-gray-100 text-gray-400'
                 }`}>
                   {isCompleted && <Check className="w-4 h-4 mr-1.5" />}
@@ -95,7 +95,7 @@ function AddProductWizard() {
         
         {currentStep === 5 && (
           <div className="py-20 text-center">
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">Step 5: AI Review & Submit</h3>
+            <h3 className="text-2xl font-bold text-gray-900 mb-2" style={{ fontFamily: "var(--font-koi-heading)" }}>Step 5: AI Review & Submit</h3>
             <p className="text-gray-500 mb-6">This step will be implemented in the next sprint.</p>
             <div className="inline-block px-4 py-2 bg-green-50 text-green-700 rounded-lg font-medium border border-green-200">
               Compliance Evidence saved successfully!

@@ -112,7 +112,7 @@ export default function DocumentUploadCard({
 
   return (
     <section
-      className="bg-card border border-[#E6DED4] rounded-[20px] overflow-hidden"
+      className="bg-card border border-[#E5E7EB] rounded-[20px] overflow-hidden"
       style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}
     >
       {/* Header */}
@@ -221,7 +221,7 @@ export default function DocumentUploadCard({
                   placeholder="https://pubmed.ncbi.nlm.nih.gov/..."
                   value={link}
                   onChange={(e) => updateLink(idx, e.target.value)}
-                  className="h-11 rounded-xl border-[#E6DED4] bg-[#FDFCFA] px-4 text-sm placeholder:text-muted/60 hover:border-[#C9C1B6] focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-200"
+                  className="h-11 rounded-xl border-[#E5E7EB] bg-[#FDFCFA] px-4 text-sm placeholder:text-muted/60 hover:border-[#C9C1B6] focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-200"
                 />
                 <button
                   type="button"
@@ -295,7 +295,7 @@ function TabButton({ active, onClick, icon: Icon, label }) {
 
 function FileRow({ file, onRemove }) {
   return (
-    <div className="flex items-center justify-between bg-[#FDFCFA] border border-[#E6DED4] rounded-xl px-4 py-3 group">
+    <div className="flex items-center justify-between bg-[#FDFCFA] border border-[#E5E7EB] rounded-xl px-4 py-3 group">
       <div className="flex items-center gap-3 min-w-0">
         <div className="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0">
           <File className="w-4 h-4" />

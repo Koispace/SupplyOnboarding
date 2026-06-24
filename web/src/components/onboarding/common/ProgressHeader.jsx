@@ -44,9 +44,9 @@ export default function ProgressHeader({
       )}
 
       {/* Progress bar */}
-      <div className="mt-4 w-full h-[5px] rounded-full bg-[#E6DED4] overflow-hidden">
+      <div className="mt-4 w-full h-[5px] rounded-full bg-[#E5E7EB] overflow-hidden">
         <div
-          className="h-full rounded-full bg-[#4F3863] transition-all duration-500 ease-out"
+          className="h-full rounded-full bg-[#0E4032] transition-all duration-500 ease-out"
           style={{ width: `${progressPercent}%` }}
         />
       </div>

@@ -1,6 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, use } from "react";
+import { fetchAllProducts } from "@/lib/data/productFetcher";
+import { useRouter } from "next/navigation";
 import {
   ArrowLeft,
   ShoppingBag,
@@ -24,6 +26,12 @@ import {
   CircleDot,
 } from "lucide-react";
 
+const iconMap = {
+  ArrowLeft, ShoppingBag, ShieldCheck, Check, AlertTriangle, ChevronRight,
+  Plus, Minus, Star, Zap, Dumbbell, Flame, Leaf, Heart, TrendingUp,
+  ArrowUpRight, Info, ThumbsUp, Sparkles, CircleDot
+};
+
 // ─── DESIGN TOKENS ───
 const C = {
   green: "#0E4032",
@@ -35,65 +43,7 @@ const C = {
   border: "#E2E8D8",
 };
 
-// ─── MOCK PRODUCT DATA ───
-const PRODUCT = {
-  brand: "THE WHOLE TRUTH",
-  name: "Peanut Butter Protein Bar",
-  price: 90,
-  packSize: "52g",
-  koiScore: 88,
-  koiStatus: "Approved",
-  verdict: {
-    summary:
-      "Excellent protein snack with clean ingredients and no added sugar. Great for post-workout or healthy snacking.",
-    pros: [
-      "10g protein per bar",
-      "No added sugar",
-      "No artificial preservatives",
-    ],
-    cons: ["Slightly calorie dense"],
-  },
-  labelLens: [
-    { label: "Protein", value: "Excellent", status: "good" },
-    { label: "Sugar", value: "Low", status: "good" },
-    { label: "Preservatives", value: "None", status: "good" },
-    { label: "Additives", value: "Minimal", status: "neutral" },
-    { label: "Oils", value: "Good fats", status: "good" },
-  ],
-  nutrition: [
-    { label: "Calories", value: "210", unit: "kcal", icon: Flame },
-    { label: "Protein", value: "10", unit: "g", icon: Dumbbell, insight: "42% higher than average bars" },
-    { label: "Carbs", value: "22", unit: "g", icon: Zap },
-    { label: "Sugar", value: "2", unit: "g", icon: CircleDot, insight: "78% less than average bars" },
-    { label: "Fat", value: "11", unit: "g", icon: Heart },
-    { label: "Fibre", value: "3", unit: "g", icon: Leaf },
-  ],
-  benefits: [
-    { title: "High Satiety", desc: "Keeps you full 3–4 hours due to protein + fibre + healthy fats.", icon: TrendingUp },
-    { title: "Muscle Recovery", desc: "10g whey + peanut protein aids post-workout recovery.", icon: Dumbbell },
-    { title: "Sustained Energy", desc: "Low-GI carbs prevent sugar spikes and afternoon crashes.", icon: Zap },
-  ],
-  goodIngredients: [
-    { name: "Peanuts", desc: "Rich in healthy monounsaturated fats" },
-    { name: "Whey Protein", desc: "Complete amino acid profile" },
-    { name: "Cocoa", desc: "Natural source of antioxidants" },
-  ],
-  watchOuts: [
-    { name: "Maltitol", desc: "Sugar alcohol — may cause GI issues in some" },
-    { name: "Calorie Density", desc: "210 kcal in 52g — mindful portion sizing" },
-  ],
-  alternatives: [
-    { label: "Higher Protein", brand: "Muscle Blaze", name: "Protein Bar – Choco Fudge", protein: "20g", calories: "220 kcal", score: 91, price: 150 },
-    { label: "Lower Calorie", brand: "Yoga Bar", name: "Protein Bar – Almond Fudge", protein: "8g", calories: "140 kcal", score: 84, price: 60 },
-    { label: "Budget Pick", brand: "RiteBite", name: "Max Protein Bar – Choco Berry", protein: "10g", calories: "190 kcal", score: 79, price: 50 },
-  ],
-  reviews: [
-    { name: "Aditya S.", tag: "Gym snack", rating: 5, text: "Perfect post-workout. Love that it has no added sugar and actually tastes good." },
-    { name: "Priya M.", tag: "Weight loss", rating: 4, text: "Good alternative to biscuits when cravings hit. Protein keeps me full longer." },
-    { name: "Rahul K.", tag: "Protein goal", rating: 5, text: "Best clean-label protein bar in India. No junk ingredients." },
-  ],
-  reviewTags: ["Gym snack", "Weight loss", "Protein goal", "Healthy cravings"],
-};
+// Data fetched dynamically.
 
 // ─── KOI SCORE RING ───
 function KoiScore({ score, size = 52 }) {
@@ -115,11 +65,34 @@ function KoiScore({ score, size = 52 }) {
 // ═══════════════════════════════════════════════
 // MAIN PAGE
 // ═══════════════════════════════════════════════
-export default function ProductDetailPage() {
+export default function ProductDetailPage({ params }) {
+  const unwrappedParams = use(params);
+  const { id } = unwrappedParams;
+  const router = useRouter();
   const [qty, setQty] = useState(1);
   const [activeTag, setActiveTag] = useState("All");
+  const [activeImage, setActiveImage] = useState("hero");
+  const [p, setProduct] = useState(null);
 
-  const p = PRODUCT;
+  useEffect(() => {
+    async function load() {
+      const data = await fetchAllProducts();
+      const match = data.find(item => item.id === id);
+      setProduct(match);
+    }
+    load();
+  }, [id]);
+
+  if (!p) {
+    return (
+      <div className="min-h-screen flex items-center justify-center" style={{ background: C.bg }}>
+        <div className="animate-pulse flex flex-col items-center">
+          <Leaf className="w-8 h-8 text-[#0E4032] mb-4 animate-bounce" />
+          <p className="text-[#0E4032] font-medium" style={{ fontFamily: "var(--font-koi-body)" }}>Loading Product...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen pb-24 md:pb-8" style={{ background: C.bg }}>
@@ -128,7 +101,7 @@ export default function ProductDetailPage() {
       <header className="sticky top-0 z-50 backdrop-blur-xl bg-[#F2F6EC]/85 border-b border-[#E2E8D8]/60">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between h-14">
-            <button className="w-9 h-9 rounded-xl flex items-center justify-center bg-white/60 border border-[#E2E8D8] hover:bg-white transition-colors">
+            <button onClick={() => router.back()} className="w-9 h-9 rounded-xl flex items-center justify-center bg-white/60 border border-[#E2E8D8] hover:bg-white transition-colors">
               <ArrowLeft className="w-4 h-4" style={{ color: C.green }} />
             </button>
             <span className="text-sm font-semibold" style={{ color: C.green, fontFamily: "var(--font-koi-heading)" }}>
@@ -147,18 +120,48 @@ export default function ProductDetailPage() {
         {/* ── SECTION 2 — PRODUCT HERO ── */}
         <section className="py-6 md:py-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-            {/* Image */}
-            <div className="relative bg-gradient-to-br from-[#F2F6EC] to-[#E8EFE0] rounded-3xl border border-[#E2E8D8] h-[320px] md:h-[420px] flex items-center justify-center overflow-hidden">
-              <div className="w-40 h-40 rounded-full bg-white/60 backdrop-blur-sm flex items-center justify-center border border-[#E2E8D8]">
-                <Leaf className="w-16 h-16 text-[#0E4032]/15" />
-              </div>
-              {/* KOI Badge */}
-              <div className="absolute top-4 left-4 flex items-center gap-2 bg-white/90 backdrop-blur-sm rounded-full pl-1 pr-3.5 py-1 border border-[#E2E8D8]/60 shadow-sm">
-                <KoiScore score={p.koiScore} size={36} />
-                <div>
-                  <p className="text-[10px] font-bold uppercase tracking-wider" style={{ color: C.green }}>KOI {p.koiStatus}</p>
+            {/* Image Gallery */}
+            <div className="flex flex-col gap-4">
+              <div className="relative bg-[#F2F6EC] rounded-3xl border border-[#E2E8D8] h-[320px] md:h-[420px] flex items-center justify-center overflow-hidden">
+                {p.image?.[activeImage] ? (
+                  <img 
+                    src={p.image[activeImage]} 
+                    alt={`${p.name} - ${activeImage}`} 
+                    className="w-full h-full object-cover transition-all duration-300"
+                  />
+                ) : (
+                  <div className="w-40 h-40 rounded-full bg-white/60 backdrop-blur-sm flex items-center justify-center border border-[#E2E8D8]">
+                    <Leaf className="w-16 h-16 text-[#0E4032]/15" />
+                  </div>
+                )}
+                {/* KOI Badge */}
+                <div className="absolute top-4 left-4 flex items-center gap-2 bg-white/90 backdrop-blur-sm rounded-full pl-1 pr-3.5 py-1 border border-[#E2E8D8]/60 shadow-sm">
+                  <KoiScore score={p.score} size={36} />
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-wider" style={{ color: C.green }}>KOI {p.koiStatus}</p>
+                  </div>
                 </div>
               </div>
+
+              {/* Thumbnails */}
+              {p.image && (
+                <div className="flex items-center gap-3 overflow-x-auto hide-scrollbar pb-2">
+                  {["hero", "lifestyle", "label"].map((imgKey) => (
+                    p.image[imgKey] && (
+                      <button
+                        key={imgKey}
+                        onClick={() => setActiveImage(imgKey)}
+                        className={`relative w-20 h-20 md:w-24 md:h-24 shrink-0 rounded-2xl border-2 overflow-hidden transition-all duration-200 ${
+                          activeImage === imgKey ? "border-[#0E4032] opacity-100 shadow-sm" : "border-[#E2E8D8] opacity-60 hover:opacity-100"
+                        }`}
+                      >
+                        <img src={p.image[imgKey]} alt={imgKey} className="w-full h-full object-cover" />
+                        {activeImage !== imgKey && <div className="absolute inset-0 bg-black/5 hover:bg-transparent transition-colors" />}
+                      </button>
+                    )
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Info */}
@@ -167,7 +170,7 @@ export default function ProductDetailPage() {
               <h1 className="text-2xl md:text-3xl font-bold leading-tight mb-3" style={{ color: C.green, fontFamily: "var(--font-koi-heading)" }}>
                 {p.name}
               </h1>
-              <p className="text-sm mb-6" style={{ color: C.muted }}>{p.packSize}</p>
+              <p className="text-sm mb-6" style={{ color: C.muted }}>{p.weight}</p>
 
               <div className="flex items-baseline gap-2 mb-8">
                 <span className="text-3xl font-bold" style={{ color: C.green, fontFamily: "var(--font-koi-heading)" }}>₹{p.price}</span>
@@ -253,7 +256,7 @@ export default function ProductDetailPage() {
           <h2 className="text-lg font-bold mb-4" style={{ color: C.green, fontFamily: "var(--font-koi-heading)" }}>Nutrition Breakdown</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {p.nutrition.map((n, i) => {
-              const Icon = n.icon;
+              const Icon = iconMap[n.icon] || Info;
               return (
                 <div key={i} className="bg-white rounded-2xl border border-[#E2E8D8] p-4 flex flex-col">
                   <div className="flex items-center gap-2 mb-3">
@@ -282,7 +285,7 @@ export default function ProductDetailPage() {
           <h2 className="text-lg font-bold mb-4" style={{ color: C.green, fontFamily: "var(--font-koi-heading)" }}>Why people choose this</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {p.benefits.map((b, i) => {
-              const Icon = b.icon;
+              const Icon = iconMap[b.icon] || Info;
               return (
                 <div key={i} className="bg-white rounded-2xl border border-[#E2E8D8] p-5 hover:-translate-y-0.5 transition-all duration-300">
                   <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style={{ background: `${C.lime}20` }}>

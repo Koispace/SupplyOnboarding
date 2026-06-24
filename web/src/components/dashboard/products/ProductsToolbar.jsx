@@ -12,7 +12,7 @@ export default function ProductsToolbar({ searchQuery, setSearchQuery }) {
           placeholder="Search products by name..." 
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4F3863]/20 focus:border-[#4F3863] transition-all"
+          className="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0E4032]/20 focus:border-[#0E4032] transition-all"
         />
       </div>
       <div className="flex items-center gap-3 w-full sm:w-auto">

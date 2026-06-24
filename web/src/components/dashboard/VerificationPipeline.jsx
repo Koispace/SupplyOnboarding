@@ -3,19 +3,19 @@ import { cn } from '@/lib/utils'
 
 export default function VerificationPipeline({ pipeline }) {
   return (
-    <div className="bg-white rounded-2xl border border-[#E6DED4] p-6 shadow-[0_4px_20px_rgba(0,0,0,0.02)] h-full">
-      <h2 className="text-xl font-display font-bold text-[#231C2D] mb-6">
+    <div className="bg-white rounded-2xl border border-[#E5E7EB] p-6 shadow-[0_4px_20px_rgba(0,0,0,0.02)] h-full">
+      <h2 className="text-xl font-display font-bold text-[#111827] mb-6" style={{ fontFamily: "var(--font-koi-heading)" }}>
         Verification Pipeline
       </h2>
       <div className="space-y-0 relative">
         {/* Continuous vertical line behind dots */}
-        <div className="absolute left-[9px] top-4 bottom-4 w-px bg-[#E6DED4] z-0" />
+        <div className="absolute left-[9px] top-4 bottom-4 w-px bg-[#E5E7EB] z-0" />
         
         {pipeline.map((stage, idx) => {
           let dotColor = 'bg-gray-300'
           if (stage.key === 'submitted') dotColor = 'bg-blue-400'
           if (stage.key === 'ai_review') dotColor = 'bg-amber-400'
-          if (stage.key === 'human_review') dotColor = 'bg-[#4F3863]'
+          if (stage.key === 'human_review') dotColor = 'bg-[#0E4032]'
           if (stage.key === 'approved') dotColor = 'bg-green-500'
 
           return (
@@ -27,11 +27,11 @@ export default function VerificationPipeline({ pipeline }) {
                 <div className="w-5 h-5 rounded-full bg-white border-2 border-transparent flex items-center justify-center relative">
                   <div className={cn("w-2.5 h-2.5 rounded-full", dotColor)} />
                 </div>
-                <span className="text-[15px] font-medium text-[#231C2D]">
+                <span className="text-[15px] font-medium text-[#111827]">
                   {stage.stage}
                 </span>
               </div>
-              <span className="text-[16px] font-bold text-[#6B6473] group-hover:text-[#4F3863] transition-colors">
+              <span className="text-[16px] font-bold text-[#6B7280] group-hover:text-[#0E4032] transition-colors">
                 {stage.count}
               </span>
             </div>

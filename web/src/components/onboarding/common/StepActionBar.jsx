@@ -49,7 +49,7 @@ export default function StepActionBar({
               variant="outline"
               onClick={onSaveDraft}
               disabled={isSaving}
-              className="border-[#E6DED4] text-foreground hover:bg-background gap-2"
+              className="border-[#E5E7EB] text-foreground hover:bg-background gap-2"
             >
               <Save className="w-4 h-4" />
               <span className="hidden sm:inline">Save Draft</span>

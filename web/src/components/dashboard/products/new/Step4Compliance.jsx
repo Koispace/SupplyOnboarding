@@ -56,7 +56,7 @@ export default function Step4Compliance() {
   const EvidenceCard = ({ title, badge, badgeStyle = 'bg-gray-100 text-gray-600', impactLabel, description, children }) => (
     <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
       <div className="flex justify-between items-start mb-2">
-        <h4 className="font-bold text-gray-900">{title}</h4>
+        <h4 className="font-bold text-gray-900" style={{ fontFamily: "var(--font-koi-heading)" }}>{title}</h4>
         {badge && (
           <span className={`text-[10px] font-bold px-2 py-1 uppercase tracking-wider rounded ${badgeStyle}`}>
             {badge}
@@ -119,17 +119,17 @@ export default function Step4Compliance() {
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div>
-        <h3 className="text-2xl font-bold text-gray-900 mb-2">Compliance & Evidence</h3>
+        <h3 className="text-2xl font-bold text-gray-900 mb-2" style={{ fontFamily: "var(--font-koi-heading)" }}>Compliance & Evidence</h3>
         <p className="text-gray-500">Provide supporting evidence for product claims and certifications.</p>
       </div>
 
-      <div className="bg-[#4F3863]/5 border border-[#4F3863]/20 rounded-xl p-5 flex gap-4 items-start">
-        <div className="w-10 h-10 rounded-full bg-[#4F3863]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-          <ShieldCheck className="w-5 h-5 text-[#4F3863]" />
+      <div className="bg-[#0E4032]/5 border border-[#0E4032]/20 rounded-xl p-5 flex gap-4 items-start">
+        <div className="w-10 h-10 rounded-full bg-[#0E4032]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+          <ShieldCheck className="w-5 h-5 text-[#0E4032]" />
         </div>
         <div>
-          <h5 className="font-bold text-[#4F3863] text-sm mb-1">Trust Signals Matter</h5>
-          <p className="text-sm text-[#4F3863]/80 leading-relaxed">
+          <h5 className="font-bold text-[#0E4032] text-sm mb-1" style={{ fontFamily: "var(--font-koi-heading)" }}>Trust Signals Matter</h5>
+          <p className="text-sm text-[#0E4032]/80 leading-relaxed">
             Products with verified certifications and lab-backed claims receive higher trust scores and faster approvals.
           </p>
         </div>
@@ -164,7 +164,7 @@ export default function Step4Compliance() {
         <textarea 
           value={compliance.evidenceNotes || ''}
           onChange={(e) => updateCompliance({ evidenceNotes: e.target.value })}
-          className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4F3863]/20 focus:border-[#4F3863] transition-all min-h-[180px] text-sm"
+          className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0E4032]/20 focus:border-[#0E4032] transition-all min-h-[180px] text-sm"
           placeholder={"Example:\n• Protein content validated by NABL lab report dated Jan 2026\n• Contains clinically studied probiotic strain\n• No added refined sugar"}
         />
       </EvidenceCard>
@@ -190,7 +190,7 @@ export default function Step4Compliance() {
           <Button 
             onClick={handleContinue} 
             disabled={loading}
-            className="bg-[#4F3863] hover:bg-[#382648] text-white h-12 px-8 rounded-xl font-semibold w-full sm:w-auto"
+            className="bg-[#0E4032] hover:bg-[#0a2e24] text-white h-12 px-8 rounded-xl font-semibold w-full sm:w-auto"
           >
             {loading ? (
               <div className="flex items-center gap-2">
