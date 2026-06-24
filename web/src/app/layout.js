@@ -1,5 +1,6 @@
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import AppProviders from "@/components/providers/AppProviders";
 import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({
@@ -24,8 +25,10 @@ export default function RootLayout({ children }) {
       className={`${inter.variable} ${plusJakarta.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        {children}
-        <Toaster />
+        <AppProviders>
+          {children}
+          <Toaster />
+        </AppProviders>
       </body>
     </html>
   );
