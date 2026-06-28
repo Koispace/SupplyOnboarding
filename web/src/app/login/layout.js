@@ -1,6 +1,4 @@
-import DashboardShell from '@/components/dashboard/DashboardShell'
 import { Bricolage_Grotesque, Hanken_Grotesk } from "next/font/google";
-import AuthGuard from '@/components/auth/AuthGuard';
 
 const bricolage = Bricolage_Grotesque({
   variable: "--font-koi-heading",
@@ -15,19 +13,21 @@ const hanken = Hanken_Grotesk({
 });
 
 export const metadata = {
-  title: 'Dashboard | KOI Health',
-  description: 'KOI Health-first Commerce Brand Dashboard',
-}
+  title: 'Sign In | KOI Health',
+  description: 'Sign in to your KOI supplier account',
+};
 
-export default function DashboardLayout({ children }) {
+export default function LoginLayout({ children }) {
   return (
     <div
       className={`${bricolage.variable} ${hanken.variable} min-h-screen`}
-      style={{ fontFamily: "var(--font-koi-body), sans-serif", background: "#F2F6EC" }}
+      style={{ 
+        fontFamily: "var(--font-koi-body), sans-serif", 
+        background: "#F2F6EC",
+        "--font-display": "var(--font-koi-heading)"
+      }}
     >
-      <AuthGuard>
-        <DashboardShell>{children}</DashboardShell>
-      </AuthGuard>
+      {children}
     </div>
-  )
+  );
 }

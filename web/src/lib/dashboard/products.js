@@ -7,13 +7,20 @@ export async function getProducts(filters = {}) {
   const supabase = getSupabaseClient()
 
   let query = supabase
-    .from('dashboard_products_view')
-    .select('*')
+    .from('products')
+    .select(`
+      id,
+      product_name,
+      category_l1,
+      status,
+      created_at,
+      skus ( id, screening_reports ( final_score ) )
+    `)
     .order('created_at', { ascending: false })
 
   // Apply filters if needed
   if (filters.search) {
-    query = query.ilike('productName', `%${filters.search}%`)
+    query = query.ilike('product_name', `%${filters.search}%`)
   }
   if (filters.status) {
     query = query.eq('status', filters.status)
@@ -22,22 +29,33 @@ export async function getProducts(filters = {}) {
   const { data, error } = await query
 
   if (error) {
-    console.error('Error fetching products view:', error)
+    console.error('Error fetching products:', error)
     throw error
   }
 
-  // The view returns normalized product objects natively:
-  // { id, productName, category, status, created_at, skuCount, totalStock, healthScore }
-  return data.map((product) => ({
-    id: product.id,
-    name: product.productName,
-    category: product.category,
-    status: product.status,
-    skuCount: Number(product.skuCount) || 0,
-    stock: Number(product.totalStock) || 0,
-    healthScore: product.healthScore,
-    createdAt: product.created_at,
-  }))
+  return data.map((product) => {
+    // try to get health score from the first SKU that has a screening report
+    let healthScore = null;
+    if (product.skus && product.skus.length > 0) {
+       for (const sku of product.skus) {
+           if (sku.screening_reports && sku.screening_reports.length > 0) {
+               healthScore = sku.screening_reports[0].final_score;
+               break;
+           }
+       }
+    }
+
+    return {
+      id: product.id,
+      name: product.product_name,
+      category: product.category_l1,
+      status: product.status,
+      skuCount: product.skus ? product.skus.length : 0,
+      stock: 0, // inventory table is not linked currently
+      healthScore: healthScore,
+      createdAt: product.created_at,
+    };
+  })
 }
 
 export async function getProductStats() {
@@ -52,29 +70,23 @@ export async function getProductStats() {
   const { count: liveProducts, error: err2 } = await supabase
     .from('products')
     .select('id', { count: 'exact', head: true })
-    .eq('status', 'live')
+    .eq('status', 'approved')
 
   // Under review
   const { count: underReview, error: err3 } = await supabase
     .from('products')
     .select('id', { count: 'exact', head: true })
-    .in('status', ['under_review', 'ai_processing'])
+    .in('status', ['pending_ai_review', 'pending_screening', 'pending_upload', 'draft'])
 
-  // Risk Alerts (health score < 80)
-  const { count: riskAlerts, error: err4 } = await supabase
-    .from('dashboard_products_view')
-    .select('id', { count: 'exact', head: true })
-    .lt('healthScore', 80)
-
-  if (err1 || err2 || err3 || err4) {
-    console.error('Error fetching product stats', { err1, err2, err3, err4 })
-    throw err1 || err2 || err3 || err4
+  if (err1 || err2 || err3) {
+    console.error('Error fetching product stats', { err1, err2, err3 })
+    throw err1 || err2 || err3
   }
 
   return {
     totalProducts: totalProducts || 0,
     liveProducts: liveProducts || 0,
     underReview: underReview || 0,
-    riskAlerts: riskAlerts || 0,
+    riskAlerts: 0, // riskAlerts relies on complex sku joins, default to 0 for now
   }
 }

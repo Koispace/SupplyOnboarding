@@ -3,14 +3,17 @@ import { cn } from "@/lib/utils";
 
 export default function OnboardingShell({ leftPanel, rightPanel, className }) {
   return (
-    <div className={cn("flex flex-col lg:flex-row min-h-screen lg:h-screen bg-background text-foreground lg:overflow-hidden", className)}>
+    <div 
+      className={cn("flex flex-col lg:flex-row min-h-screen lg:h-screen lg:overflow-hidden", className)}
+      style={{ fontFamily: "var(--font-koi-body), sans-serif", background: "#F2F6EC", color: "#0E4032" }}
+    >
       {/* Left Panel - 44% on Desktop */}
       <div className="w-full lg:w-[44%] relative overflow-hidden flex flex-col p-6 md:p-8 lg:px-12 lg:py-8">
         {/* Molecular Background Pattern */}
         <div 
-          className="absolute inset-0 pointer-events-none opacity-[0.15]"
+          className="absolute inset-0 pointer-events-none opacity-[0.12]"
           style={{
-            backgroundImage: `radial-gradient(circle at 2px 2px, var(--color-primary) 1px, transparent 0)`,
+            backgroundImage: `radial-gradient(circle at 2px 2px, #0E4032 1px, transparent 0)`,
             backgroundSize: '32px 32px'
           }}
         />

@@ -2,8 +2,9 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
+import { signOutUser } from '@/lib/firebase/auth'
 import { 
   LayoutDashboard, 
   Package, 
@@ -25,6 +26,16 @@ const NAV_ITEMS = [
 
 export default function DashboardSidebar({ onClose }) {
   const pathname = usePathname()
+  const router = useRouter()
+
+  const handleLogout = async () => {
+    try {
+      await signOutUser()
+      router.push('/login')
+    } catch (error) {
+      console.error('Logout failed:', error)
+    }
+  }
 
   return (
     <div className="h-full w-full bg-[#F2F6EC] border-r border-[#E5E7EB] flex flex-col">
@@ -76,7 +87,10 @@ export default function DashboardSidebar({ onClose }) {
           <BookOpen className="w-[18px] h-[18px]" />
           Documentation
         </button>
-        <button className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-[14px] font-medium text-red-600/80 hover:bg-red-50 hover:text-red-700 transition-all duration-200 mt-2">
+        <button 
+          onClick={handleLogout}
+          className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-[14px] font-medium text-red-600/80 hover:bg-red-50 hover:text-red-700 transition-all duration-200 mt-2"
+        >
           <LogOut className="w-[18px] h-[18px]" />
           Logout
         </button>

@@ -21,8 +21,8 @@ export default function StepActionBar({
 }) {
   return (
     <div
-      className="sticky bottom-0 z-30 w-full bg-card/80 backdrop-blur-md border-t border-[#D9D2C8]"
-      style={{ boxShadow: '0 -4px 20px rgba(0,0,0,0.04)' }}
+      className="sticky bottom-0 z-30 w-full bg-white/80 backdrop-blur-md border-t border-[#E2E8D8]"
+      style={{ boxShadow: '0 -4px 20px rgba(14,64,50,0.04)' }}
     >
       <div className="max-w-[1100px] mx-auto flex items-center justify-between px-6 md:px-10 py-4">
         {/* Left: Back */}
@@ -33,7 +33,7 @@ export default function StepActionBar({
               variant="ghost"
               onClick={onBack}
               disabled={isSaving}
-              className="text-muted hover:text-foreground gap-2"
+              className="text-[#5A6B5A] hover:text-[#0E4032] gap-2"
             >
               <ArrowLeft className="w-4 h-4" />
               Back
@@ -49,7 +49,7 @@ export default function StepActionBar({
               variant="outline"
               onClick={onSaveDraft}
               disabled={isSaving}
-              className="border-[#E5E7EB] text-foreground hover:bg-background gap-2"
+              className="border-[#E2E8D8] text-[#0E4032] hover:bg-[#EDF2E6] gap-2"
             >
               <Save className="w-4 h-4" />
               <span className="hidden sm:inline">Save Draft</span>
@@ -60,7 +60,8 @@ export default function StepActionBar({
             type="button"
             onClick={onContinue}
             disabled={isSaving}
-            className="bg-primary hover:bg-primary/90 text-white gap-2 px-6 h-11 font-semibold rounded-xl shadow-sm hover:shadow-md transition-all"
+            className="text-white gap-2 px-6 h-11 font-semibold rounded-xl shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5"
+            style={{ background: "#0E4032", fontFamily: "var(--font-koi-body)" }}
           >
             {isLastStep ? submitLabel : 'Continue'}
             {!isLastStep && <ArrowRight className="w-4 h-4" />}
